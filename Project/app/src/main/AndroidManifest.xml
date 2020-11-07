@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.dotory">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".student.StudentAttendanceOndayActivity"></activity>
+        <activity android:name=".manager.ManagerStudentInformationActivity" />
+        <activity android:name=".manager.ManagerStayChoiceActivity" />
+        <activity android:name=".manager.ManagerNoticWriteActivity" />
+        <activity android:name=".manager.ManagerAttendanceActivity" />
+        <activity android:name=".manager.ManagerDemeritActivity" />
+        <activity android:name=".manager.ManagerPostUploadActivity" />
+        <activity android:name=".manager.ManagerBoardActivity" />
+        <activity android:name=".student.StudentInformationActivity" />
+        <activity android:name=".student.StudentStayChoiceActivity" />
+        <activity android:name=".student.StudentAttendanceOvernightActivity" />
+        <activity android:name=".student.StudentDemeritActivity" />
+        <activity android:name=".student.StudentBoardActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".JoinActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

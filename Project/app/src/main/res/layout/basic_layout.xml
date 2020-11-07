@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_weight="0.07"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/app_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="DOTORY"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+
+    <ScrollView android:id="@+id/main_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.85"
+        android:paddingTop="1px"
+        android:paddingBottom="1px"
+        android:background="@color/colorScrolBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/colorNoticeBackground"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Title"
+                        android:textColor="@color/colorNoticeTitle"
+                        android:textSize="25dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Contents"
+                        android:textColor="@color/colorNoticeBody" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout android:id="@+id/menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08"
+        android:background="@color/colorMenu"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="menuBoardOnClick"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:weightSum="2">
+
+            <ImageView
+                android:id="@+id/menu_board_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorMenu"
+                android:focusableInTouchMode="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_board" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingTop="2dp"
+                android:text="게시판"
+                android:textSize="13dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="menuAttendanceOnClick"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:weightSum="2">
+
+            <ImageView
+                android:id="@+id/menu_attendance_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorMenu"
+                android:focusableInTouchMode="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_attendance" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingTop="2dp"
+                android:text="외출"
+                android:textSize="13dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="menuDemeritOnClick"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:weightSum="2">
+
+            <ImageView
+                android:id="@+id/menu_demerit_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorMenu"
+                android:focusableInTouchMode="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_demerit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingTop="2dp"
+                android:text="상벌점"
+                android:textSize="13dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="menuStayOnClick"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:weightSum="2">
+
+            <ImageView
+                android:id="@+id/menu_stay_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorMenu"
+                android:focusableInTouchMode="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_stay" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingTop="2dp"
+                android:text="외박"
+                android:textSize="13dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="menuInformationOnClick"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:weightSum="2">
+
+            <ImageView
+                android:id="@+id/menu_information_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorMenu"
+                android:focusableInTouchMode="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_information" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingTop="2dp"
+                android:text="개인정보"
+                android:textSize="13dp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_entrance_year">
+        <item>2020</item>
+        <item>2019</item>
+        <item>2018</item>
+    </string-array>
+
+    <string-array name="array_grade">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="array_class">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>

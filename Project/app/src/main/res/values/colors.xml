@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#c4b4ab</color>
+    <color name="colorPrimaryDark">#c4b4ab</color>
+
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorButton">#a6958b</color>
+    <color name="colorButtonDown">#87776d</color>
+    <color name="colorBasic">#8a6652</color>
+    <color name="colorMenu">#ffffff</color>
+
+    <color name="temp">#c4b4ab</color>
+
+    <color name="colorScrolBackground">#cccccc</color>
+    <color name="colorNoticeBackground">#ffffff</color>
+    <color name="colorNoticeTitle">#000000</color>
+    <color name="colorNoticeBody">#000000</color>
+    <color name="colorBoardButton">#ffffff</color>
+
+    <color name="colorInformaitonProfile">#ffffff</color>
+    <color name="colorInformationItem">#888888</color>
+    <color name="colorInformationContent">#000000</color>
+    <color name="colorInformationButton">#ffffff</color>
+</resources>
