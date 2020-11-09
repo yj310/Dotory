@@ -17,7 +17,7 @@
             android:paddingTop="50dp"
             android:gravity="center"
             android:text="Dotory"
-            android:textSize="50dp"
+            android:textSize="45dp"
             android:fontFamily="@font/fontstyle"
             android:textColor="#000000"/>
     </LinearLayout>
@@ -25,28 +25,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"
+        android:layout_weight="0.4"
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/user_e_mail"
+            android:id="@+id/input_email"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/input_box_border"
-            android:hint="아이디"
-            android:inputType="textCapWords"
+            android:hint="이메일"
+            android:inputType="textEmailAddress"
             android:padding="12dp"
             android:textColor="#222222"
             android:textColorHint="#999999" />
 
         <EditText
-            android:id="@+id/user_password"
+            android:id="@+id/input_password"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/input_box_border"
             android:hint="비밀번호"
             android:inputType="textPassword"
@@ -55,45 +55,47 @@
             android:textColorHint="#999999" />
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/login_btn"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="#cccccc"
+            android:background="@drawable/login_button_border"
             android:text="Login"
+            android:textAllCaps="false"
             android:textColor="#555555"
-            android:onClick="loginOnClick"
-            android:textAllCaps="false" />
+            android:textSize="18dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp"
             android:orientation="horizontal"
-            android:weightSum="10"
-            android:layout_marginTop="10dp">
-
+            android:weightSum="10">
 
 
             <TextView
+                android:id="@+id/join_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:gravity="center"
-                android:onClick="JoinOnClick"
                 android:text="회원가입"
-                android:textColor="#999999" />
+                android:textColor="#999999"
+                android:textSize="15dp" />
 
             <TextView
+                android:id="@+id/find_password_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_weight="5"
+                android:gravity="center"
+                android:onClick="FindPasswordOnClick"
                 android:text="비밀번호 찾기"
-                android:textColor="#999999" />
+                android:textColor="#999999"
+                android:textSize="15dp" />
 
         </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>

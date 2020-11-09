@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.08"
-        android:background="@color/colorMenu"
+        android:background="@drawable/menu_bar_border"
         android:orientation="horizontal"
         android:paddingTop="5dp"
         android:weightSum="5">
@@ -156,7 +156,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:onClick="menuDemeritOnClick"
+            android:onClick="menuPointOnClick"
             android:orientation="vertical"
             android:padding="4dp"
             android:weightSum="2">

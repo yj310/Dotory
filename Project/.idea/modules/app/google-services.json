@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "714987752430",
+    "firebase_url": "https://dotory-f6a74.firebaseio.com",
+    "project_id": "dotory-f6a74",
+    "storage_bucket": "dotory-f6a74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714987752430:android:e7c98c1d5976650a289cff",
+        "android_client_info": {
+          "package_name": "com.example.dotory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714987752430-8f3oihngi6mo54e9jho2chobk4bbmlmu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dotory",
+            "certificate_hash": "1803fe77bc4e8efa153627445caccf91bf4fbff6"
+          }
+        },
+        {
+          "client_id": "714987752430-l2ns132gljpo51c64bcmcpqnh2ttahr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTgFy6jB63LZIx5Eom2T5jYrd31_WV7aI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714987752430-l2ns132gljpo51c64bcmcpqnh2ttahr7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
