@@ -70,7 +70,6 @@ public class StudentBoardActivity extends AppCompatActivity {
                 Toast.makeText(StudentBoardActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
         adapter = new PostCustomAdapter(arrayList, this);
         recyclerView.setAdapter(adapter);
 

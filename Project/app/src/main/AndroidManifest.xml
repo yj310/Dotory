@@ -11,10 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".exam"></activity>
+        <activity android:name=".student.StudentInformationModifyActivity"></activity>
+        <activity android:name=".student.StudentInformationDetailActivity" />
+        <activity android:name=".manager.ManagerPointActivity" />
+        <activity android:name=".manager.ManagerAttendanceGoOutActivity" />
+        <activity android:name=".manager.ManagerAttendanceEnterActivity" />
+        <activity android:name=".exam" />
         <activity android:name=".student.StudentAttendanceStateActivity" />
         <activity android:name=".student.StudentAttendanceGoOutActivity" />
-        <activity android:name=".manager.ManagerStudentInformationActivity" />
+        <activity android:name=".manager.ManagerInformationActivity" />
         <activity android:name=".manager.ManagerStayChoiceActivity" />
         <activity android:name=".manager.ManagerNoticWriteActivity" />
         <activity android:name=".manager.ManagerAttendanceActivity" />

@@ -151,30 +151,13 @@ public class JoinActivity extends AppCompatActivity {
     }
 
     private void writeNewUser() {
-        //Toast.makeText(JoinActivity.this, "%%", Toast.LENGTH_SHORT).show();
-/*
-        Toast.makeText(JoinActivity.this, tv_room.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_entrance.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_phone.getText().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_email.getText().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_password.getText().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_guardian_phone.getText().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_address_load.getText().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_address_detail.getText().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_grade.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_school_class.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_class_number.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_birth_year.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_birth_month.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(JoinActivity.this, tv_birth_day.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-*/
+
 
         StudentUser studentUser = new StudentUser(tv_name.getText().toString()
                 , tv_room.getSelectedItem().toString()
                 , tv_entrance.getSelectedItem().toString()
                 , tv_phone.getText().toString()
                 , tv_email.getText().toString()
-                , tv_password.getText().toString()
                 , tv_guardian_phone.getText().toString()
                 , tv_address_load.getText().toString()
                 , tv_address_detail.getText().toString()
@@ -184,10 +167,8 @@ public class JoinActivity extends AppCompatActivity {
                 , tv_birth_year.getSelectedItem().toString()
                 , tv_birth_month.getSelectedItem().toString()
                 , tv_birth_day.getSelectedItem().toString());
-        //Toast.makeText(JoinActivity.this, "!!", Toast.LENGTH_SHORT).show();
 
         mDatabase.child("StudentUser").child(tv_email.getText().toString().split("@")[0]).setValue(studentUser);
-        //Toast.makeText(JoinActivity.this, "3", Toast.LENGTH_SHORT).show();
 
     }
 

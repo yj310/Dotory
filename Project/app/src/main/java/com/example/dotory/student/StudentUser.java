@@ -7,7 +7,6 @@ public class StudentUser {
     private String entrance_year;
     private String phone;
     private String email;
-    private String password;
     private String guardian_phone;
     private String address_load;
     private String address_detail;
@@ -20,13 +19,12 @@ public class StudentUser {
 
     public StudentUser(){}
 
-    public StudentUser(String name, String room, String entrance_year, String phone, String email, String password, String guardian_phone, String address_load, String address_detail, String grade, String school_class, String class_number, String birth_year, String birth_month, String birth_day) {
+    public StudentUser(String name, String room, String entrance_year, String phone, String email, String guardian_phone, String address_load, String address_detail, String grade, String school_class, String class_number, String birth_year, String birth_month, String birth_day) {
         this.name = name;
         this.room = room;
         this.entrance_year = entrance_year;
         this.phone = phone;
         this.email = email;
-        this.password = password;
         this.guardian_phone = guardian_phone;
         this.address_load = address_load;
         this.address_detail = address_detail;
@@ -150,11 +148,5 @@ public class StudentUser {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

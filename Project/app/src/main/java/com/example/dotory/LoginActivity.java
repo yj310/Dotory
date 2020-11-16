@@ -65,14 +65,13 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent;
-                    switch(view.getId()){
-                        case R.id.join_btn:
-                            intent = new Intent(LoginActivity.this, JoinActivity.class);
-                            startActivity(intent);
-                            break;
-                        case R.id.login_btn:
-                            login();
-
+            switch(view.getId()){
+                case R.id.join_btn:
+                    intent = new Intent(LoginActivity.this, JoinActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.login_btn:
+                    login();
                     break;
             }
         }

@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.dotory.R;
 
-public class ManagerDemeritActivity extends AppCompatActivity {
+public class ManagerInformationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_demerit);
+        setContentView(R.layout.activity_manager_information);
     }
 }

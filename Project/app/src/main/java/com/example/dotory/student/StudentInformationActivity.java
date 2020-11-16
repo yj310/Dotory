@@ -47,7 +47,6 @@ public class StudentInformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_student_information);
@@ -61,32 +60,12 @@ public class StudentInformationActivity extends AppCompatActivity {
 
 
         findViewById(R.id.logout_btn).setOnClickListener(onClickListener);
-
-        /*if(tv_info_name == null) {
-            Toast.makeText(this, "tv_info_name null", Toast.LENGTH_SHORT).show();
-        }*/
-        /*if(tv_info_room == null) {
-            Toast.makeText(this, "tv_info_room null", Toast.LENGTH_SHORT).show();
-        }
-        if(tv_info_grade_class_number == null) {
-            Toast.makeText(this, "tv_info_grade_class_number null", Toast.LENGTH_SHORT).show();
-        }
-        if(tv_info_phone == null) {
-            Toast.makeText(this, "tv_info_phone null", Toast.LENGTH_SHORT).show();
-        }
-        if(tv_info_email == null) {
-            Toast.makeText(this, "tv_info_email null", Toast.LENGTH_SHORT).show();
-        }*/
+        findViewById(R.id.detail_info_btn).setOnClickListener(onClickListener);
+        findViewById(R.id.modify_info_btn).setOnClickListener(onClickListener);
 
 
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
-
-        //tv_name.setText("asdf");
-        //imageView.setBackground(new ShapeDrawable(new OvalShape()));
-        //imageView.setClipToOutline(true);
-
-
 
         database = FirebaseDatabase.getInstance();
 
@@ -103,7 +82,6 @@ public class StudentInformationActivity extends AppCompatActivity {
 
 
                         tv_info_name.setText(studentUser.getName());
-
                         tv_info_room.setText(studentUser.getRoom());
                         tv_info_grade_class_number.setText(studentUser.getGrade() + "학년 " + studentUser.getSchool_class() + "반 " + studentUser.getClass_number() + "번");
                         tv_info_phone.setText(studentUser.getPhone());
@@ -129,12 +107,25 @@ public class StudentInformationActivity extends AppCompatActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Intent intent;
             switch(view.getId()){
                 case R.id.logout_btn:
-                    Intent intent = new Intent(StudentInformationActivity.this, LoginActivity.class);
+                    intent = new Intent(StudentInformationActivity.this, LoginActivity.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     finish();
+                    break;
+                case R.id.detail_info_btn:
+                    intent = new Intent(StudentInformationActivity.this, StudentInformationDetailActivity.class);
+                    intent.putExtra("email", email);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                    break;
+                case R.id.modify_info_btn:
+                    intent = new Intent(StudentInformationActivity.this, StudentInformationModifyActivity.class);
+                    intent.putExtra("email", email);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
                     break;
             }
         }
