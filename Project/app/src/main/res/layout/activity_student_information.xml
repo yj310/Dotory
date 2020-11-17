@@ -187,29 +187,34 @@
 
 
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/push_btn"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:orientation="horizontal"
-                android:background="@drawable/button_border_1">
+                android:background="@drawable/button_border_1"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
-                    android:text="알림 설정"
                     android:layout_marginLeft="50dp"
-                    android:textSize="20dp"
                     android:fontFamily="@font/fontstyle_noto_sans_kr_regular"
-                    android:textColor="#333333"/>
+                    android:text="알림 설정"
+                    android:textColor="#333333"
+                    android:textSize="20dp" />
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/left_arrow"
+                    android:layout_marginLeft="170dp"
                     android:focusableInTouchMode="true"
                     android:scaleType="fitCenter"
-                    android:layout_marginLeft="170dp"/>
+                    android:src="@drawable/left_arrow" />
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/account_btn"
                 android:layout_width="match_parent"

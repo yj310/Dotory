@@ -60,9 +60,10 @@ public class StudentInformationActivity extends AppCompatActivity {
         tv_info_email = (TextView) findViewById(R.id.info_text_email);
 
 
-        findViewById(R.id.account_btn).setOnClickListener(onClickListener);
         findViewById(R.id.detail_info_btn).setOnClickListener(onClickListener);
         findViewById(R.id.modify_info_btn).setOnClickListener(onClickListener);
+        findViewById(R.id.push_btn).setOnClickListener(onClickListener);
+        findViewById(R.id.account_btn).setOnClickListener(onClickListener);
 
 
         Intent intent = getIntent();
@@ -110,11 +111,6 @@ public class StudentInformationActivity extends AppCompatActivity {
         public void onClick(View view) {
             Intent intent;
             switch(view.getId()){
-                case R.id.account_btn:
-                    intent = new Intent(StudentInformationActivity.this, StudentInformationAccountActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
-                    break;
                 case R.id.detail_info_btn:
                     intent = new Intent(StudentInformationActivity.this, StudentInformationDetailActivity.class);
                     intent.putExtra("email", email);
@@ -124,6 +120,16 @@ public class StudentInformationActivity extends AppCompatActivity {
                 case R.id.modify_info_btn:
                     intent = new Intent(StudentInformationActivity.this, StudentInformationModifyActivity.class);
                     intent.putExtra("email", email);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                    break;
+                case R.id.push_btn:
+                    intent = new Intent(StudentInformationActivity.this, StudentInformationPushActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                    break;
+                case R.id.account_btn:
+                    intent = new Intent(StudentInformationActivity.this, StudentInformationAccountActivity.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     break;
