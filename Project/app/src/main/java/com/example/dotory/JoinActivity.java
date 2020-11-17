@@ -142,7 +142,7 @@ public class JoinActivity extends AppCompatActivity {
 
             }
         } else {
-            Toast.makeText(JoinActivity.this, "입력되지 않은 항목이 존재합니다..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JoinActivity.this, "입력되지 않은 항목이 존재합니다.", Toast.LENGTH_SHORT).show();
 
         }
 

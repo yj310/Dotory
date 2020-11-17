@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.example.dotory.R;
+import com.example.dotory.student.information.StudentInformationActivity;
 
 public class StudentAttendanceEnterActivity extends AppCompatActivity {
 

@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:orientation="horizontal"
-                android:background="@drawable/info_button_border">
+                android:background="@drawable/button_border_1">
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
@@ -168,7 +168,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:orientation="horizontal"
-                android:background="@drawable/info_button_border">
+                android:background="@drawable/button_border_1">
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
@@ -191,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:orientation="horizontal"
-                android:background="@drawable/info_button_border">
+                android:background="@drawable/button_border_1">
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
@@ -211,38 +211,15 @@
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/logout_btn"
+                android:id="@+id/account_btn"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:orientation="horizontal"
-                android:background="@drawable/info_button_border">
+                android:background="@drawable/button_border_1">
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
-                    android:text="로그아웃"
-                    android:layout_marginLeft="50dp"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/fontstyle_noto_sans_kr_regular"
-                    android:textColor="#333333"/>
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/left_arrow"
-                    android:focusableInTouchMode="true"
-                    android:scaleType="fitCenter"
-                    android:layout_marginLeft="170dp"/>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:orientation="horizontal"
-                android:background="@drawable/info_button_border">
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:text="회원 탈퇴"
+                    android:text="계정 관리"
                     android:layout_marginLeft="50dp"
                     android:textSize="20dp"
                     android:fontFamily="@font/fontstyle_noto_sans_kr_regular"

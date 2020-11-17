@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.dotory.Post;
 import com.example.dotory.PostCustomAdapter;
 import com.example.dotory.R;
-import com.example.dotory.exam;
+import com.example.dotory.student.information.StudentInformationActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
