@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_weight="0.07"
+        android:background="@drawable/title_bar_border"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:id="@+id/go_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/colorMenu"
+                android:focusableInTouchMode="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/right_arrow" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/app_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="계정 관리"
+            android:layout_marginRight="30dp"
+            android:fontFamily="@font/fontstyle"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+    <ScrollView android:id="@+id/main_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.93"
+        android:paddingBottom="1px"
+        android:background="#ffffff" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:background="@color/colorNoticeBackground">
+
+            <LinearLayout
+                android:id="@+id/logout_btn"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:orientation="horizontal"
+                android:background="@drawable/button_border_2">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:text="로그아웃"
+                    android:layout_marginLeft="50dp"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/fontstyle_noto_sans_kr_regular"
+                    android:textColor="#333333"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/left_arrow"
+                    android:focusableInTouchMode="true"
+                    android:scaleType="fitCenter"
+                    android:layout_marginLeft="170dp"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/withdrawal_btn"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:orientation="horizontal"
+                android:background="@drawable/button_border_2">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:text="계정 탈퇴"
+                    android:layout_marginLeft="50dp"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/fontstyle_noto_sans_kr_regular"
+                    android:textColor="#333333"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/left_arrow"
+                    android:focusableInTouchMode="true"
+                    android:scaleType="fitCenter"
+                    android:layout_marginLeft="170dp"/>
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>
