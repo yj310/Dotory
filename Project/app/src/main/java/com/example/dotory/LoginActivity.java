@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dotory.manager.ManagerBoardActivity;
+import com.example.dotory.manager.ManagerLoginActivity;
 import com.example.dotory.student.StudentBoardActivity;
 import com.example.dotory.student.StudentUser;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
         findViewById(R.id.join_btn).setOnClickListener(onClickListener);
         findViewById(R.id.login_btn).setOnClickListener(onClickListener);
+        findViewById(R.id.manager_login_btn).setOnClickListener(onClickListener);
 
         /*loginButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -73,6 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.login_btn:
                     login();
                     break;
+                case R.id.manager_login_btn:
+                    intent = new Intent(LoginActivity.this, ManagerLoginActivity.class);
+                    startActivity(intent);
+                    break;
             }
         }
     };
@@ -81,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
 
         final String email = ((EditText) findViewById(R.id.input_email)).getText().toString();
-        String password = ((EditText) findViewById(R.id.input_password)).getText().toString();
+        final String password = ((EditText) findViewById(R.id.input_password)).getText().toString();
 
         if (email.length() > 0 && password.length() > 0 ) {
 
@@ -94,8 +101,11 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
 
+
                                 Intent intent = new Intent(LoginActivity.this, StudentBoardActivity.class);
                                 intent.putExtra("email", email);
+
+
 
                                 startActivity(intent);
                                 finish();

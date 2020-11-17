@@ -11,6 +11,7 @@
         android:layout_weight="0.45"
         android:orientation="vertical">
 
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -98,4 +99,24 @@
 
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:gravity="bottom"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/manager_login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="관리자 모드"
+            android:textColor="#999999"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="15dp" />
+    </LinearLayout>
+
 </LinearLayout>
