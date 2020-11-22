@@ -16,24 +16,25 @@
         <activity android:name=".student.information.StudentInformationAccountActivity" />
         <activity android:name=".student.information.StudentInformationModifyActivity" />
         <activity android:name=".student.information.StudentInformationDetailActivity" />
-        <activity android:name=".manager.ManagerPointActivity" />
-        <activity android:name=".manager.ManagerAttendanceGoOutActivity" />
-        <activity android:name=".manager.ManagerAttendanceEnterActivity" />
         <activity android:name=".exam" />
         <activity android:name=".student.StudentAttendanceStateActivity" />
         <activity android:name=".student.StudentAttendanceGoOutActivity" />
-        <activity android:name=".manager.ManagerInformationActivity" />
-        <activity android:name=".manager.ManagerStayChoiceActivity" />
-        <activity android:name=".manager.ManagerNoticWriteActivity" />
-        <activity android:name=".manager.ManagerAttendanceActivity" />
-        <activity android:name=".manager.ManagerDemeritActivity" />
-        <activity android:name=".manager.ManagerPostUploadActivity" />
-        <activity android:name=".manager.ManagerBoardActivity" />
         <activity android:name=".student.information.StudentInformationActivity" />
         <activity android:name=".student.StudentStayChoiceActivity" />
         <activity android:name=".student.StudentAttendanceEnterActivity" />
         <activity android:name=".student.StudentPointActivity" />
         <activity android:name=".student.StudentBoardActivity" />
+
+        <activity android:name=".manager.ManagerPointActivity" />
+        <activity android:name=".manager.ManagerAttendanceGoOutActivity" />
+        <activity android:name=".manager.ManagerAttendanceEnterActivity" />
+        <activity android:name=".manager.ManagerInformationActivity" />
+        <activity android:name=".manager.ManagerStayChoiceActivity" />
+        <activity android:name=".manager.ManagerNoticWriteActivity" />
+        <activity android:name=".manager.ManagerPostUploadActivity" />
+        <activity android:name=".manager.ManagerPostModifyActivity" />
+        <activity android:name=".manager.ManagerBoardActivity" />
+
         <activity android:name=".LoginActivity" />
         <activity android:name=".JoinActivity" />
         <activity android:name=".MainActivity">

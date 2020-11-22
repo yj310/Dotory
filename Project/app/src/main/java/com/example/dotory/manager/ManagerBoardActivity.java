@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.dotory.LoginActivity;
+import com.example.dotory.ManagerPostCustomAdapter;
 import com.example.dotory.Post;
 import com.example.dotory.PostCustomAdapter;
 import com.example.dotory.R;
@@ -44,6 +49,7 @@ public class ManagerBoardActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_manager_board);
 
+
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -62,7 +68,10 @@ public class ManagerBoardActivity extends AppCompatActivity {
                 arrayList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Post post = snapshot.getValue(Post.class);
-                    arrayList.add(post);
+                    if(post.isVisible())
+                    {
+                        arrayList.add(post);
+                    }
 
                 }
                 Collections.reverse(arrayList);
@@ -75,8 +84,14 @@ public class ManagerBoardActivity extends AppCompatActivity {
                 Toast.makeText(ManagerBoardActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        adapter = new PostCustomAdapter(arrayList, this);
+
+
+
+        adapter = new ManagerPostCustomAdapter(arrayList, this);
         recyclerView.setAdapter(adapter);
+
+
+
 
     }
 

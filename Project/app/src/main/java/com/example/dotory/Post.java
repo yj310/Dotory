@@ -1,5 +1,14 @@
 package com.example.dotory;
 
+import android.widget.Toast;
+
+import com.example.dotory.manager.ManagerPostUploadActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Post {
 
     private String title;
@@ -58,6 +67,7 @@ public class Post {
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
+
 
 
 }
