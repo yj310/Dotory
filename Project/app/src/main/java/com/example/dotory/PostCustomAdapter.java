@@ -10,6 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+/*
+class Descending implements Comparator<Integer>{
+
+    public int compare(Integer a, Integer b)
+    {
+        return b.compareTo(a);
+    }
+}
+*/
 
 public class PostCustomAdapter extends RecyclerView.Adapter<PostCustomAdapter.PostCustomViewHolder> {
 
@@ -18,6 +29,9 @@ public class PostCustomAdapter extends RecyclerView.Adapter<PostCustomAdapter.Po
 
     public PostCustomAdapter(ArrayList<Post> arrayList, Context context) {
         this.arrayList = arrayList;
+        //this.arrayList = new ArrayList<Post>();
+        //this.arrayList.add(new Post("title", "content1", "date", "time", true));
+        //this.arrayList.add(new Post("title", "content2", "date", "time", true));
         this.context = context;
     }
 

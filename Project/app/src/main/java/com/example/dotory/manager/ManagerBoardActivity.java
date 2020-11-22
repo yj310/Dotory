@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.dotory.LoginActivity;
 import com.example.dotory.Post;
 import com.example.dotory.PostCustomAdapter;
 import com.example.dotory.R;
@@ -26,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ManagerBoardActivity extends AppCompatActivity {
 
@@ -48,6 +50,8 @@ public class ManagerBoardActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();
 
+        findViewById(R.id.create_new_post).setOnClickListener(onClickListener);
+
         database = FirebaseDatabase.getInstance();
 
         databaseReference = database.getReference("post");
@@ -61,6 +65,7 @@ public class ManagerBoardActivity extends AppCompatActivity {
                     arrayList.add(post);
 
                 }
+                Collections.reverse(arrayList);
                 adapter.notifyDataSetChanged();
             }
 
@@ -75,7 +80,19 @@ public class ManagerBoardActivity extends AppCompatActivity {
 
     }
 
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch(view.getId()){
+                case R.id.create_new_post:
 
+                    Intent intent = new Intent(ManagerBoardActivity.this, ManagerPostUploadActivity.class);
+                    //intent.putExtra("email", email);
+                    startActivity(intent);
+                    break;
+            }
+        }
+    };
 
     public void menuBoardOnClick(View view)
     {

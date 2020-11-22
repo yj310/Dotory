@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.example.dotory.manager.ManagerBoardActivity;
 import com.example.dotory.student.StudentBoardActivity;
 
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                //Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, ManagerBoardActivity.class);
                 startActivity(intent);
                 finish();
             }
