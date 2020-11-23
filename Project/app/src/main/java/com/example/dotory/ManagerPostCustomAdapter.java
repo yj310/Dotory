@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.dotory.manager.ManagerBoardActivity;
 import com.example.dotory.manager.ManagerPostModifyActivity;
 import com.example.dotory.manager.ManagerPostUploadActivity;
@@ -26,6 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,11 +63,21 @@ public class ManagerPostCustomAdapter extends RecyclerView.Adapter<ManagerPostCu
 
     @Override
     public void onBindViewHolder(@NonNull PostCustomViewHolder holder, int position) {
+
         holder.tv_title.setText(arrayList.get(position).getTitle());
         holder.tv_date.setText(arrayList.get(position).getDate());
         holder.tv_content.setText(arrayList.get(position).getContent());
         holder.id = arrayList.get(position).getDate().replaceAll("-", "") + arrayList.get(position).getTime().replaceAll(":", "");
 
+
+        if(arrayList.get(position).getImg_url().length() > 0)
+        {
+            FirebaseStorage fs = FirebaseStorage.getInstance();
+            StorageReference imagesRef = fs.getReference().child("postImages/"+arrayList.get(position).getImg_url());
+            Glide.with(holder.itemView)
+                    .load(imagesRef)
+                    .into(holder.iv_post_img);
+        }
     }
 
     @Override
@@ -78,6 +92,7 @@ public class ManagerPostCustomAdapter extends RecyclerView.Adapter<ManagerPostCu
         TextView tv_content;
         String id;
         LinearLayout post_menu_button;
+        ImageView iv_post_img;
 
         public PostCustomViewHolder(@NonNull final View itemView) {
             super(itemView);
@@ -85,6 +100,7 @@ public class ManagerPostCustomAdapter extends RecyclerView.Adapter<ManagerPostCu
             this.tv_date = itemView.findViewById(R.id.text_date);
             this.tv_content = itemView.findViewById(R.id.text_content);
             this.post_menu_button = itemView.findViewById(R.id.post_menu_button);
+            this.iv_post_img = itemView.findViewById(R.id.post_img);
             this.post_menu_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

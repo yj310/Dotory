@@ -15,15 +15,17 @@ public class Post {
     private String date;
     private String time;
     private String content;
+    private String img_url;
     private boolean visible;
 
     public Post(){}
 
-    public Post(String title, String content, String date, String time, boolean visible){
+    public Post(String title, String content, String date, String time, String img_url, boolean visible){
         this.title = title;
         this.content = content;
         this.date = date;
         this.time = time;
+        this.img_url = img_url;
         this.visible = visible;
     }
 
@@ -68,6 +70,11 @@ public class Post {
         this.visible = visible;
     }
 
+    public String getImg_url() {
+        return img_url;
+    }
 
-
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
 }

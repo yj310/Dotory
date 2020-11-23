@@ -5,16 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Registry;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class exam extends AppCompatActivity {
 
@@ -24,17 +35,26 @@ public class exam extends AppCompatActivity {
     private ArrayList<Post> arrayList;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+    private ImageView img_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
 
+        img_view = findViewById(R.id.img);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();
+
+        FirebaseStorage fs = FirebaseStorage.getInstance();
+        StorageReference imagesRef = fs.getReference().child("profile.png");
+        Glide.with(this)
+                .load(imagesRef)
+                .into(img_view);
+
 
         database = FirebaseDatabase.getInstance();
 
@@ -46,9 +66,12 @@ public class exam extends AppCompatActivity {
                 arrayList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Post post = snapshot.getValue(Post.class);
-                    arrayList.add(post);
-
+                    if(post.isVisible())
+                    {
+                        arrayList.add(post);
+                    }
                 }
+                Collections.reverse(arrayList);
                 adapter.notifyDataSetChanged();
             }
 
