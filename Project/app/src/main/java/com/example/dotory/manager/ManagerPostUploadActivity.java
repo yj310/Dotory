@@ -66,6 +66,7 @@ public class ManagerPostUploadActivity extends AppCompatActivity {
         findViewById(R.id.post_add_file_btn).setOnClickListener(onClickListener);
         findViewById(R.id.post_upload_btn).setOnClickListener(onClickListener);
     }
+
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -74,7 +75,6 @@ public class ManagerPostUploadActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.post_add_image_btn:
-                    Toast.makeText(ManagerPostUploadActivity.this, "이미지 로드", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     intent.setType("image/*");
                     intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -188,7 +188,7 @@ public class ManagerPostUploadActivity extends AppCompatActivity {
                         et_content.getText().toString(),
                         formatDate.format(time),
                         formatTime.format(time),
-                        formatID.format(time) + ".png",
+                        formatID.format(time) + ".jpg",
                         true
                 );
             } else {

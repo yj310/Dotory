@@ -87,6 +87,7 @@
                 android:background="@drawable/input_post"
                 android:textColor="#222222"
                 android:textSize="17dp" />
+
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
