@@ -51,7 +51,8 @@
                 android:textColor="@color/colorNoticeBody" />
             <ImageView
                 android:id="@+id/post_img"
-                android:layout_width="300dp"
+                android:layout_width="350dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 

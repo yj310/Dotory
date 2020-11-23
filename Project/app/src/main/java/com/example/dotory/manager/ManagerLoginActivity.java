@@ -79,7 +79,6 @@ public class ManagerLoginActivity extends AppCompatActivity {
 
                 if(password.length() > 0) {
                     if (password.equals(dataSnapshot.child("password").getValue().toString())) {
-                        Toast.makeText(ManagerLoginActivity.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ManagerLoginActivity.this, ManagerBoardActivity.class);
                         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
