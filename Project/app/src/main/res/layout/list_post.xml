@@ -52,7 +52,7 @@
             <ImageView
                 android:id="@+id/post_img"
                 android:layout_width="300dp"
-                android:layout_height="300dp"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -16,9 +16,11 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 
 public class PostCustomAdapter extends RecyclerView.Adapter<PostCustomAdapter.PostCustomViewHolder> {
@@ -44,8 +46,18 @@ public class PostCustomAdapter extends RecyclerView.Adapter<PostCustomAdapter.Po
     @Override
     public void onBindViewHolder(@NonNull PostCustomViewHolder holder, int position) {
 
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date now = new Date();
+        String today = formatter.format(now);
+        if(arrayList.get(position).getDate().equals(today))
+        {
+            holder.tv_date.setText(arrayList.get(position).getDate() + arrayList.get(position).getTime());
+        } else
+        {
+            holder.tv_date.setText(arrayList.get(position).getDate());
+        }
+
         holder.tv_title.setText(arrayList.get(position).getTitle());
-        holder.tv_date.setText(arrayList.get(position).getDate());
         holder.tv_content.setText(arrayList.get(position).getContent());
 
         if(arrayList.get(position).getImg_url().length() > 0)

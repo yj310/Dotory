@@ -182,7 +182,7 @@ public class ManagerPostModifyActivity extends AppCompatActivity {
                     filename = post.getImg_url().substring(0, post.getImg_url().indexOf("_") + 1)
                             + Integer.toString((post.getImg_url().charAt(post.getImg_url().indexOf("_") + 1) - '0' + 1)) + ".jpg";
                 }
-                
+
                 storage.getReference().child("postImages/" + prevfilename).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
 
                     @Override
@@ -257,6 +257,7 @@ public class ManagerPostModifyActivity extends AppCompatActivity {
                 {
                     databaseReference.setValue(post);
                     Toast.makeText(ManagerPostModifyActivity.this, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
 
 

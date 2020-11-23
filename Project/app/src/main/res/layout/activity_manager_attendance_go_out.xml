@@ -88,11 +88,12 @@
                 android:paddingRight="20dp">
 
                 <TextView
+                    android:id="@+id/text_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:gravity="center"
-                    android:text="2020년 09월 16일"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -114,9 +115,11 @@
                     android:textSize="18dp"
                     android:orientation="horizontal">
                     <EditText
+                        android:id="@+id/first_time_hour"
                         android:layout_width="60dp"
                         android:layout_height="35dp"
                         android:textSize="18dp"
+                        android:gravity="center"
                         android:background="@drawable/input_box_border"
                         />
                     <TextView
@@ -126,9 +129,11 @@
                         android:textStyle="bold"
                         android:textSize="18dp"/>
                     <EditText
+                        android:id="@+id/first_time_minute"
                         android:layout_width="60dp"
                         android:layout_height="35dp"
                         android:textSize="18dp"
+                        android:gravity="center"
                         android:background="@drawable/input_box_border"
                         />
                     <TextView
@@ -140,9 +145,11 @@
                         android:textSize="18dp"/>
 
                     <EditText
+                        android:id="@+id/second_time_hour"
                         android:layout_width="60dp"
                         android:layout_height="35dp"
                         android:textSize="18dp"
+                        android:gravity="center"
                         android:background="@drawable/input_box_border"
                         />
                     <TextView
@@ -152,15 +159,18 @@
                         android:textStyle="bold"
                         android:textSize="18dp"/>
                     <EditText
+                        android:id="@+id/second_time_minute"
                         android:layout_width="60dp"
                         android:layout_height="35dp"
                         android:textSize="18dp"
+                        android:gravity="center"
                         android:background="@drawable/input_box_border"
                         />
 
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/setting_btn"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -258,177 +268,18 @@
                             android:textColor="#000000"
                             android:text="입소시간"/>
                     </LinearLayout>
-                    <LinearLayout
+
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:background="@drawable/list_table_body"
-                        android:weightSum="6">
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="401"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="김미림"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="입소완료"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="18:12"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="19:00"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="19:42"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:background="@drawable/list_table_body"
-                        android:weightSum="6">
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="401"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="차미림"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text=""/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text=""/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text=""/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text=""/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:background="@drawable/list_table_body"
-                        android:weightSum="6">
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="402"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="한미림"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="외출중"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="17:54"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text="18:30"/>
-                        <TextView
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textSize="16dp"
-                            android:textColor="#444444"
-                            android:text=""/>
-                    </LinearLayout>
+                        android:descendantFocusability="blocksDescendants">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
 
                 </LinearLayout>
 

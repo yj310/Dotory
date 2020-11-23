@@ -112,34 +112,37 @@ public class JoinActivity extends AppCompatActivity {
         String passwordAgain = ((EditText)findViewById(R.id.input_password_again)).getText().toString();
 
         if(email.length() > 0 && password.length() > 0 && passwordAgain.length() > 0) {
-            if (password.equals(passwordAgain)) {
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(JoinActivity.this, "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                                    writeNewUser();
-                                    Toast.makeText(JoinActivity.this, "*", Toast.LENGTH_SHORT).show();
+            if (email.split("@")[1].equals("e-mirim.hs.kr")){
+                if (password.equals(passwordAgain)) {
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        writeNewUser();
+                                        Toast.makeText(JoinActivity.this, "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
 
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    finish();
-                                } else {
-                                    if(task.getException() != null){
-                                        Toast.makeText(JoinActivity.this, "회원가입에 실패하였습니다.",
-                                                Toast.LENGTH_SHORT).show();
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        finish();
+                                    } else {
+                                        if (task.getException() != null) {
+                                            Toast.makeText(JoinActivity.this, "회원가입에 실패하였습니다.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+
                                     }
 
+                                    // ...
                                 }
+                            });
 
-                                // ...
-                            }
-                        });
+                } else {
+                    Toast.makeText(JoinActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
 
+                }
             } else {
-                Toast.makeText(JoinActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(JoinActivity.this, "미림여자정보과학고등학교의 이메일이 아닙니다.", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(JoinActivity.this, "입력되지 않은 항목이 존재합니다.", Toast.LENGTH_SHORT).show();
