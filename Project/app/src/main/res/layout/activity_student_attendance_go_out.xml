@@ -117,12 +117,23 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/text_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+
                 <EditText
                     android:id="@+id/purpose"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/input_box_border"
                     android:hint="외출 목적"
@@ -166,6 +177,15 @@
                     android:text="외출"
                     android:textSize="18dp"/>
 
+                <Button
+                    android:id="@+id/enter_btn"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/login_button_border"
+                    android:text="입소"
+                    android:textSize="18dp"/>
 
             </LinearLayout>
 

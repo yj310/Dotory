@@ -152,7 +152,7 @@ public class ManagerAttendanceEnterActivity extends AppCompatActivity {
 
 
 
-                if(!first_time.equals("00:00")) {
+                if(!(first_time.equals("00:00")&&second_time.equals("00:00"))) {
                     SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
                     String now_time = formatter.format(now);
 

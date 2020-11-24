@@ -32,6 +32,7 @@ public class StudentAttendanceGoOutActivity extends AppCompatActivity {
     private TextView purpose;
     private TextView place;
     private TextView expected_time;
+    private TextView text_state;
 
     private String name;
     private String room;
@@ -62,8 +63,10 @@ public class StudentAttendanceGoOutActivity extends AppCompatActivity {
         purpose = findViewById(R.id.purpose);
         place = findViewById(R.id.place);
         expected_time = findViewById(R.id.expected_time);
+        text_state = findViewById(R.id.text_state);
 
         findViewById(R.id.go_out_btn).setOnClickListener(onClickListener);
+        findViewById(R.id.enter_btn).setOnClickListener(onClickListener);
 
 
 
@@ -78,51 +81,6 @@ public class StudentAttendanceGoOutActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
-        // 학생 정보 불러오기
-        databaseReference = database.getReference("StudentUser");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // 파이어베이스의 데이터를 받아오는 곳
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    StudentUser studentUser = snapshot.getValue(StudentUser.class);
-                    if(studentUser.getEmail().equals(email))
-                    {
-                        name = studentUser.getName();
-                        room = studentUser.getRoom();
-                        key = studentUser.getRoom() + email.split("@")[0];
-
-                        // get my state
-                        databaseReference = database.getReference("attendance/go_out/"+ today +"student");
-                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    if(snapshot.getKey().toString().equals(key))
-                                    {
-                                        studentGoOutState = snapshot.getValue(StudentGoOutState.class);
-                                        state = studentGoOutState.getState();
-                                        break;
-                                    }
-                                }
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                // DB를 가져오던 중 에러 발생 시
-                                Toast.makeText(StudentAttendanceGoOutActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        break;
-                    }
-
-                }
-            };
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // DB를 가져오던 중 에러 발생 시
-                Toast.makeText(StudentAttendanceGoOutActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
         // 외출 시간 불러오기
         databaseReference = database.getReference("attendance/go_out");
@@ -143,6 +101,80 @@ public class StudentAttendanceGoOutActivity extends AppCompatActivity {
             }
         });
 
+        // 학생 정보 불러오기
+        databaseReference = database.getReference("StudentUser");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 파이어베이스의 데이터를 받아오는 곳
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    StudentUser studentUser = snapshot.getValue(StudentUser.class);
+                    if(studentUser.getEmail().equals(email))
+                    {
+                        name = studentUser.getName();
+                        room = studentUser.getRoom();
+                        key = studentUser.getRoom() + email.split("@")[0];
+
+                        // get my state
+                        databaseReference = database.getReference("attendance/go_out/"+ today +"/student");
+                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    if(snapshot.getKey().equals(key))
+                                    {
+                                        studentGoOutState = snapshot.getValue(StudentGoOutState.class);
+                                        state = studentGoOutState.getState();
+                                        text_state.setText(state);
+                                        if(state.length() > 0)
+                                        {
+                                            purpose.setText(studentGoOutState.getPurpose());
+                                            place.setText(studentGoOutState.getPlace());
+                                            expected_time.setText(studentGoOutState.getExpected_time());
+                                            purpose.setFocusable(false);
+                                            purpose.setClickable(false);
+                                            place.setFocusable(false);
+                                            place.setClickable(false);
+                                            expected_time.setFocusable(false);
+                                            expected_time.setClickable(false);
+
+                                        }
+                                        break;
+                                    }
+                                }
+                                if(state.length() <= 0)
+                                {
+                                    Date now = new Date();
+                                    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+                                    String now_time = formatter.format(now);
+                                    if((Integer.parseInt(first_time.split(":")[0]) < Integer.parseInt(now_time.split(":")[0])
+                                            || (Integer.parseInt(first_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                                            && Integer.parseInt(first_time.split(":")[1]) <= Integer.parseInt(now_time.split(":")[1])))
+                                            && (Integer.parseInt(second_time.split(":")[0]) > Integer.parseInt(now_time.split(":")[0])
+                                            || (Integer.parseInt(second_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                                            && Integer.parseInt(second_time.split(":")[1]) <= Integer.parseInt(now_time.split(":")[1])))) {
+
+                                        text_state.setText("외출 가능");
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                // DB를 가져오던 중 에러 발생 시
+                                Toast.makeText(StudentAttendanceGoOutActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        break;
+                    }
+
+                }
+            };
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // DB를 가져오던 중 에러 발생 시
+                Toast.makeText(StudentAttendanceGoOutActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -154,10 +186,67 @@ public class StudentAttendanceGoOutActivity extends AppCompatActivity {
                 case R.id.go_out_btn:
                     go_out();
                     break;
+                case R.id.enter_btn:
+                    enter();
+                    break;
 
             }
         }
     };
+
+    public void enter()
+    {
+
+        databaseReference = database.getReference("attendance/go_out");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Date now = new Date();
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+                String now_time = formatter.format(now);
+                if(state.equals("외출중") || state.equals("외출중(지각)")) {
+                    if((Integer.parseInt(first_time.split(":")[0]) < Integer.parseInt(now_time.split(":")[0])
+                            || (Integer.parseInt(first_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                            && Integer.parseInt(first_time.split(":")[1]) <= Integer.parseInt(now_time.split(":")[1])))
+
+                            && (Integer.parseInt(second_time.split(":")[0]) > Integer.parseInt(now_time.split(":")[0])
+                            || (Integer.parseInt(second_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                            && Integer.parseInt(second_time.split(":")[1]) <= Integer.parseInt(now_time.split(":")[1])))) {
+
+                        Toast.makeText(StudentAttendanceGoOutActivity.this, "입소가 완료되었습니다", Toast.LENGTH_SHORT).show();
+                        studentGoOutState.setState("입소완료");
+                        studentGoOutState.setEnter_time(now_time);
+                        databaseReference = database.getReference("attendance/go_out/" + today + "/student");
+                        databaseReference.child(key).setValue(studentGoOutState);
+
+                    } else {
+                        // 입소 불가
+                        if(Integer.parseInt(second_time.split(":")[0]) < Integer.parseInt(now_time.split(":")[0])
+                                || (Integer.parseInt(second_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                                && Integer.parseInt(second_time.split(":")[1]) < Integer.parseInt(now_time.split(":")[1]))) {
+                            Toast.makeText(StudentAttendanceGoOutActivity.this, "입소가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                            studentGoOutState.setState("입소완료(지각)");
+                            databaseReference = database.getReference("attendance/go_out/" + today + "/student");
+                            databaseReference.child(key).setValue(studentGoOutState);
+                        }
+                    }
+                } else {
+                    Toast.makeText(StudentAttendanceGoOutActivity.this, "외출중이 아닙니다.", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // DB를 가져오던 중 에러 발생 시
+                Toast.makeText(StudentAttendanceGoOutActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
 
     public void go_out()
     {
@@ -198,21 +287,28 @@ public class StudentAttendanceGoOutActivity extends AppCompatActivity {
                                     || (Integer.parseInt(second_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
                                     && Integer.parseInt(second_time.split(":")[1]) >= Integer.parseInt(now_time.split(":")[1])))) {
 
-                                StudentGoOutState studentGoOutState = new StudentGoOutState(
-                                        name,
-                                        room,
-                                        "외출중",
-                                        now_time,
-                                        expected_time.getText().toString(),
-                                        "",
-                                        place.getText().toString(),
-                                        purpose.getText().toString()
-                                );
+                                if(expected_time.getText().toString().length() > 0
+                                        && place.getText().toString().length() > 0
+                                        && purpose.getText().toString().length() > 0) {
+                                    StudentGoOutState studentGoOutState = new StudentGoOutState(
+                                            name,
+                                            room,
+                                            "외출중",
+                                            now_time,
+                                            expected_time.getText().toString(),
+                                            "",
+                                            place.getText().toString(),
+                                            purpose.getText().toString()
+                                    );
 
-                                databaseReference = database.getReference("attendance/go_out/" + today + "/student");
-                                databaseReference.child(key).setValue(studentGoOutState);
-                                Toast.makeText(StudentAttendanceGoOutActivity.this, "외출 신청이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                    databaseReference = database.getReference("attendance/go_out/" + today + "/student");
+                                    databaseReference.child(key).setValue(studentGoOutState);
+                                    Toast.makeText(StudentAttendanceGoOutActivity.this, "외출 신청이 완료되었습니다.", Toast.LENGTH_SHORT).show();
 
+                                } else {
+                                    Toast.makeText(StudentAttendanceGoOutActivity.this, "입력하지 않은 항목이 존재합니다.", Toast.LENGTH_SHORT).show();
+                                }
+                                
                             } else {
                                 // 외출 시간 아님
                                 Toast.makeText(StudentAttendanceGoOutActivity.this, "외출 가능 시간이 아닙니다.", Toast.LENGTH_SHORT).show();

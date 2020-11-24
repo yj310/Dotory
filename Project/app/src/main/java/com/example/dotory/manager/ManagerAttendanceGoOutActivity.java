@@ -127,7 +127,7 @@ public class ManagerAttendanceGoOutActivity extends AppCompatActivity {
                     second_time_minute.setText(second_time.split(":")[1]);
                 }
 
-                if(!first_time.equals("00:00"))
+                if(!(first_time.equals("00:00")&&second_time.equals("00:00")))
                 {
                     SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
                     String now_time = formatter.format(now);
@@ -274,7 +274,7 @@ public class ManagerAttendanceGoOutActivity extends AppCompatActivity {
 
                         databaseReference_attendanceGoOut.child("time").child("first").setValue(first_time_hour.getText().toString() + ":" + first_time_minute.getText().toString());
                         databaseReference_attendanceGoOut.child("time").child("second").setValue(second_time_hour.getText().toString() + ":" + second_time_minute.getText().toString());
-
+                        databaseReference_GoOutState.setValue("ing");
                         Toast.makeText(ManagerAttendanceGoOutActivity.this, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                     @Override
