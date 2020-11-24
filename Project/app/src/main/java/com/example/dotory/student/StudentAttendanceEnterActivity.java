@@ -36,6 +36,7 @@ public class StudentAttendanceEnterActivity extends AppCompatActivity {
     private String email;
     private String key = "";
     private String state = "";
+    private String today;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +53,19 @@ public class StudentAttendanceEnterActivity extends AppCompatActivity {
         findViewById(R.id.enter_btn).setOnClickListener(onClickListener);
 
 
-        Date now = new Date();
+        final Date now = new Date();
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일");
-        String today = formatter.format(now);
-        text_date.setText(today);
+        text_date.setText(formatter.format(now));
+
+        formatter = new SimpleDateFormat("yyyy-MM-dd");
+        today = formatter.format(now);
+
+
 
         database = FirebaseDatabase.getInstance();
+
+        // 입소 시간 불러오기
         databaseReference = database.getReference("attendance/enter");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -77,7 +85,6 @@ public class StudentAttendanceEnterActivity extends AppCompatActivity {
         });
 
         // get my key
-        database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("StudentUser");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -87,19 +94,18 @@ public class StudentAttendanceEnterActivity extends AppCompatActivity {
                     StudentUser studentUser = snapshot.getValue(StudentUser.class);
                     if(studentUser.getEmail().equals(email)){
                         key = studentUser.getRoom() + email.split("@")[0];
+
                         // get my state
-                        database = FirebaseDatabase.getInstance();
-                        databaseReference = database.getReference("attendance/enter/student");
+                        databaseReference = database.getReference("attendance/enter/"+ today +"/student");
                         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                // 파이어베이스의 데이터를 받아오는 곳
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                    if(snapshot.getKey().toString().equals(key))
+                                    if(snapshot.getKey().equals(key))
                                     {
                                         studentEnterState = snapshot.getValue(StudentEnterState.class);
                                         state = studentEnterState.getState();
+                                        break;
                                     }
                                 }
                             }
@@ -110,7 +116,6 @@ public class StudentAttendanceEnterActivity extends AppCompatActivity {
                                 Toast.makeText(StudentAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
                             }
                         });
-
                         break;
                     }
                 }
@@ -142,7 +147,7 @@ public class StudentAttendanceEnterActivity extends AppCompatActivity {
 
     public void enter()
     {
-        database = FirebaseDatabase.getInstance();
+
         databaseReference = database.getReference("attendance/enter");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -157,43 +162,44 @@ public class StudentAttendanceEnterActivity extends AppCompatActivity {
                 if(date.equals(today))
                 {
 
-                    if(first_time.equals("00:00"))
-                    {
+                    if(first_time.equals("00:00")&&second_time.equals("00:00")) {
                         Toast.makeText(StudentAttendanceEnterActivity.this, "입소 시간이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show();
                         // 입소 시간이 정해지지 않았습니다.
-                    }
-                    else{
-                        formatter = new SimpleDateFormat("hh:mm");
+                    } else {
+                        formatter = new SimpleDateFormat("HH:mm");
                         String now_time = formatter.format(now);
-                        if(Integer.parseInt(first_time.split(":")[0]) <= Integer.parseInt(now_time.split(":")[0])
-                                &&Integer.parseInt(second_time.split(":")[0]) > Integer.parseInt(now_time.split(":")[0]))
-                        {
-                            if(state.equals("입소중"))
-                            {
-                                Toast.makeText(StudentAttendanceEnterActivity.this, "입소 가능", Toast.LENGTH_SHORT).show();
-                                studentEnterState.setState("입소완료");
-                                databaseReference = database.getReference("attendance/enter/student");
-                                databaseReference.child(key).setValue(studentEnterState);
 
-                            } else
-                            {
-                                Toast.makeText(StudentAttendanceEnterActivity.this, "입소가 불가능합니다.", Toast.LENGTH_SHORT).show();
+                        if(state.equals("입소중") || state.equals("입소중(지각)")) {
+                            if((Integer.parseInt(first_time.split(":")[0]) < Integer.parseInt(now_time.split(":")[0])
+                                    || (Integer.parseInt(first_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                                    && Integer.parseInt(first_time.split(":")[1]) <= Integer.parseInt(now_time.split(":")[1])))
+
+                                    && (Integer.parseInt(second_time.split(":")[0]) > Integer.parseInt(now_time.split(":")[0])
+                                    || (Integer.parseInt(second_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                                    && Integer.parseInt(second_time.split(":")[1]) <= Integer.parseInt(now_time.split(":")[1])))) {
+
+                                    Toast.makeText(StudentAttendanceEnterActivity.this, "입소가 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                    studentEnterState.setState("입소완료");
+                                    databaseReference = database.getReference("attendance/enter/" + today + "/student");
+                                    databaseReference.child(key).setValue(studentEnterState);
+
+                            } else {
+                                // 입소 불가
+                                if(Integer.parseInt(first_time.split(":")[0]) > Integer.parseInt(now_time.split(":")[0])
+                                        || (Integer.parseInt(first_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                                        && Integer.parseInt(first_time.split(":")[1]) > Integer.parseInt(now_time.split(":")[1]))) {
+                                    Toast.makeText(StudentAttendanceEnterActivity.this, "아직 입소시간이 되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                                } else if(Integer.parseInt(second_time.split(":")[0]) < Integer.parseInt(now_time.split(":")[0])
+                                        || (Integer.parseInt(second_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                                        && Integer.parseInt(second_time.split(":")[1]) < Integer.parseInt(now_time.split(":")[1]))) {
+                                    Toast.makeText(StudentAttendanceEnterActivity.this, "입소 시간이 지났습니다.\n지각처리", Toast.LENGTH_SHORT).show();
+                                    studentEnterState.setState("입소완료(지각)");
+                                    databaseReference = database.getReference("attendance/enter/" + today + "/student");
+                                    databaseReference.child(key).setValue(studentEnterState);
+                                }
                             }
-                        }
-                        else
-                        {
-                            // 입소 불가
-                            if(Integer.parseInt(first_time.split(":")[0]) > Integer.parseInt(now_time.split(":")[0]))
-                            {
-                                Toast.makeText(StudentAttendanceEnterActivity.this, "아직 입소시간이 되지 않았습니다.", Toast.LENGTH_SHORT).show();
-                                // 아직 입소시간이 되지 않았습니다.
-                            }
-                            else if(Integer.parseInt(second_time.split(":")[0]) <= Integer.parseInt(now_time.split(":")[0]))
-                            {
-                                Toast.makeText(StudentAttendanceEnterActivity.this, "입소 시간이 지났습니다.\n지각처리", Toast.LENGTH_SHORT).show();
-                                // 입소 시간이 지났습니다.
-                                // 지각처리
-                            }
+                        } else {
+                            Toast.makeText(StudentAttendanceEnterActivity.this, "입소가 불가능합니다." + state, Toast.LENGTH_SHORT).show();
                         }
                     }
 

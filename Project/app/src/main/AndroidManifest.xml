@@ -11,34 +11,84 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".manager.ManagerLoginActivity" android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".student.information.StudentInformationPushActivity"    android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.information.StudentInformationAccountActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.information.StudentInformationModifyActivity"  android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.information.StudentInformationDetailActivity"  android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".exam"                                                  android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.StudentAttendanceStateActivity"                android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.StudentAttendanceGoOutActivity"                android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.information.StudentInformationActivity"        android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.StudentStayChoiceActivity"                     android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.StudentAttendanceEnterActivity"                android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.StudentPointActivity"                          android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".student.StudentBoardActivity"                          android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".manager.ManagerPointActivity"                          android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".manager.ManagerAttendanceGoOutActivity"                android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".manager.ManagerAttendanceEnterActivity"                android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".manager.ManagerInformationActivity"                    android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".manager.ManagerStayChoiceActivity"                     android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".manager.ManagerNoticWriteActivity"                     android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".manager.ManagerPostUploadActivity"                     android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".manager.ManagerPostModifyActivity"                     android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".manager.ManagerBoardActivity"                          android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".LoginActivity"                                         android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".JoinActivity"                                          android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".MainActivity"                                          android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".GoOutInfoPopup"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity
+            android:name=".manager.ManagerLoginActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.information.StudentInformationPushActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.information.StudentInformationAccountActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.information.StudentInformationModifyActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.information.StudentInformationDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".exam"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.StudentAttendanceStateActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.StudentAttendanceGoOutActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.information.StudentInformationActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.StudentStayChoiceActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.StudentAttendanceEnterActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.StudentPointActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".student.StudentBoardActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".manager.ManagerPointActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".manager.ManagerAttendanceGoOutActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".manager.ManagerAttendanceEnterActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".manager.ManagerInformationActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".manager.ManagerStayChoiceActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".manager.ManagerNoticWriteActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".manager.ManagerPostUploadActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".manager.ManagerPostModifyActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".manager.ManagerBoardActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".JoinActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

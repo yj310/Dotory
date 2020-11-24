@@ -19,6 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class StudentAttendanceStateActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
@@ -31,6 +34,7 @@ public class StudentAttendanceStateActivity extends AppCompatActivity {
     private String name;
     private String go_out_state = "";
     private String enter_state = "";
+    private String today;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,11 @@ public class StudentAttendanceStateActivity extends AppCompatActivity {
         email = intent.getStringExtra("email");
 
         text_state = findViewById(R.id.text_state);
+
+        final Date now = new Date();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        today = formatter.format(now);
 
 
         database = FirebaseDatabase.getInstance();
@@ -57,7 +66,7 @@ public class StudentAttendanceStateActivity extends AppCompatActivity {
                         key = studentUser.getRoom() + email.split("@")[0];
                         name = studentUser.getName();
                         // get my state
-                        databaseReference = database.getReference("attendance/enter/student");
+                        databaseReference = database.getReference("attendance/enter/"+today+"/student");
                         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -70,7 +79,7 @@ public class StudentAttendanceStateActivity extends AppCompatActivity {
                                     }
                                 }
 
-                                databaseReference = database.getReference("attendance/go_out/student");
+                                databaseReference = database.getReference("attendance/go_out/"+today+"/student");
                                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

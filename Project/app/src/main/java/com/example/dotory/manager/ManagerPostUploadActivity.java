@@ -128,7 +128,7 @@ public class ManagerPostUploadActivity extends AppCompatActivity {
             //Unique한 파일명을 만들자.
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
             Date now = new Date();
-            String filename = formatter.format(now) + ".png";
+            String filename = formatter.format(now) + ".jpg";
             //storage 주소와 폴더 파일명을 지정해 준다.
             StorageReference storageRef = storage.getReferenceFromUrl("gs://dotory-f6a74.appspot.com").child("postImages/" + filename);
             //올라가거라...
@@ -138,7 +138,9 @@ public class ManagerPostUploadActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss(); //업로드 진행 Dialog 상자 닫기
-                            Toast.makeText(getApplicationContext(), "업로드 완료!", Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(getApplicationContext(), "게시가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     })
                     //실패시
@@ -173,7 +175,6 @@ public class ManagerPostUploadActivity extends AppCompatActivity {
         }
 
 
-        Toast.makeText(ManagerPostUploadActivity.this, "게시물 업로드중", Toast.LENGTH_SHORT).show();
         try {
             SimpleDateFormat formatID = new SimpleDateFormat("yyyyMMddHHmmss");
             SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -191,6 +192,12 @@ public class ManagerPostUploadActivity extends AppCompatActivity {
                         formatID.format(time) + ".jpg",
                         true
                 );
+
+                database = FirebaseDatabase.getInstance();
+                databaseReference = database.getReference("post");
+                databaseReference.child(formatID.format(time)).setValue(post);
+
+
             } else {
                 post = new Post(
                         et_title.getText().toString(),
@@ -200,14 +207,17 @@ public class ManagerPostUploadActivity extends AppCompatActivity {
                         "",
                         true
                 );
+
+                database = FirebaseDatabase.getInstance();
+                databaseReference = database.getReference("post");
+                databaseReference.child(formatID.format(time)).setValue(post);
+
+
+                Toast.makeText(this, "게시가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+
+                finish();
             }
-            database = FirebaseDatabase.getInstance();
-            databaseReference = database.getReference("post");
-            databaseReference.child(formatID.format(time)).setValue(post);
 
-
-            Toast.makeText(this, "게시가 완료되었습니다.", Toast.LENGTH_SHORT).show();
-            finish();
 
         }catch(Exception e){
             Toast.makeText(this, "데이터베이스 오류\n" + e.toString(), Toast.LENGTH_SHORT).show();

@@ -17,6 +17,7 @@ import com.example.dotory.AttendanceEnterCustomAdapter;
 import com.example.dotory.ManagerPostCustomAdapter;
 import com.example.dotory.R;
 import com.example.dotory.student.StudentEnterState;
+import com.example.dotory.student.StudentGoOutState;
 import com.example.dotory.student.StudentUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,9 +33,10 @@ import java.util.Date;
 public class ManagerAttendanceEnterActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
-    private DatabaseReference databaseReference2;
-    private DatabaseReference databaseReference3;
+    private DatabaseReference databaseReference_attendanceEnter;
+    private DatabaseReference databaseReference_studentEnter;
+    private DatabaseReference databaseReference_enterState;
+    private DatabaseReference databaseReference_studentUser;
     private StudentUser studentUser;
     private StudentEnterState studentEnterState;
 
@@ -48,6 +50,7 @@ public class ManagerAttendanceEnterActivity extends AppCompatActivity {
     private EditText second_time_hour;
     private EditText second_time_minute;
     private TextView text_date;
+    private String today;
 
     private String first_time;
     private String second_time;
@@ -73,31 +76,72 @@ public class ManagerAttendanceEnterActivity extends AppCompatActivity {
         text_date = findViewById(R.id.text_date);
         findViewById(R.id.setting_btn).setOnClickListener(onClickListener);
 
+
+        final Date now = new Date();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일");
+        text_date.setText(formatter.format(now));
+
+        formatter = new SimpleDateFormat("yyyy-MM-dd");
+        today = formatter.format(now);
+
+
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("attendance/enter");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference_attendanceEnter = database.getReference("attendance/enter");
+        databaseReference_studentEnter = database.getReference("attendance/enter/" + today + "/student");
+        databaseReference_enterState = database.getReference("attendance/enter/" + today + "/state");
+
+        // 입소 정보 불러오기
+        databaseReference_attendanceEnter.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 String date = dataSnapshot.child("date").getValue().toString();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                Date now = new Date();
-                String today = formatter.format(now);
-                if(!date.equals(today))
-                {
-                    databaseReference = database.getReference("attendance/enter");
-                    databaseReference.child("date").setValue(today);
-                    databaseReference.child("time").child("first").setValue("00:00");
-                    databaseReference.child("time").child("second").setValue("00:00");
+
+                // 입소 시간 로드
+                if(!date.equals(today)) {
+                    // 날짜 넘기기
+                    databaseReference_attendanceEnter.child("date").setValue(today);
+                    databaseReference_attendanceEnter.child("time").child("first").setValue("00:00");
+                    databaseReference_attendanceEnter.child("time").child("second").setValue("00:00");
                     first_time = "00:00";
                     second_time = "00:00";
                     first_time_hour.setText("00");
                     first_time_minute.setText("00");
                     second_time_hour.setText("00");
                     second_time_minute.setText("00");
-                }
-                else
-                {
+
+                    databaseReference_attendanceEnter.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            databaseReference_enterState.setValue("before");
+                        };
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // DB를 가져오던 중 에러 발생 시
+                            Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    // 오늘의 학생 입소정보 리스트 생성
+                    databaseReference_studentUser = database.getReference("StudentUser");
+                    databaseReference_studentUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            // 파이어베이스의 데이터를 받아오는 곳
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                studentUser = snapshot.getValue(StudentUser.class);
+                                studentEnterState = new StudentEnterState(studentUser.getName(), studentUser.getRoom(), "", "");
+                                databaseReference_attendanceEnter.child(today).child("student").child(studentUser.getRoom() + studentUser.getEmail().split("@")[0]).setValue(studentEnterState);
+                            }
+                        };
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // DB를 가져오던 중 에러 발생 시
+                            Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } else {
                     first_time = dataSnapshot.child("time").child("first").getValue().toString();
                     second_time = dataSnapshot.child("time").child("second").getValue().toString();
                     first_time_hour.setText(first_time.split(":")[0]);
@@ -108,83 +152,82 @@ public class ManagerAttendanceEnterActivity extends AppCompatActivity {
 
 
 
-                formatter = new SimpleDateFormat("yyyy년 MM월 dd일");
-                today = formatter.format(now);
-                text_date.setText(today);
+                if(!first_time.equals("00:00")) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+                    String now_time = formatter.format(now);
 
-                if(first_time.equals("00:00"))
-                {
-                    databaseReference2 = database.getReference("attendance/enter/student");
-                    databaseReference3 = database.getReference("StudentUser");
+                    // 현재 시간이 입소 시간에 포함이 된다면
+                    if((Integer.parseInt(first_time.split(":")[0]) < Integer.parseInt(now_time.split(":")[0])
+                            || (Integer.parseInt(first_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                            && Integer.parseInt(first_time.split(":")[1]) <= Integer.parseInt(now_time.split(":")[1])))
 
-                    databaseReference3.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            // 파이어베이스의 데이터를 받아오는 곳
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            && (Integer.parseInt(second_time.split(":")[0]) > Integer.parseInt(now_time.split(":")[0])
+                            || (Integer.parseInt(second_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                            && Integer.parseInt(second_time.split(":")[1]) >= Integer.parseInt(now_time.split(":")[1])))) {
 
-                                studentUser = snapshot.getValue(StudentUser.class);
-                                studentEnterState = new StudentEnterState(studentUser.getName(), studentUser.getRoom(), "", "");
-                                databaseReference2.child(studentUser.getRoom() + studentUser.getEmail().split("@")[0]).setValue(studentEnterState);
-
-
-                            }
-                        };
-
-
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            // DB를 가져오던 중 에러 발생 시
-                            Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                else
-                {
-                    formatter = new SimpleDateFormat("hh:mm");
-                    int now_hour = Integer.parseInt(formatter.format(now).split(":")[0]);
-                    if(Integer.parseInt(first_time.split(":")[0]) <= now_hour
-                        && Integer.parseInt(second_time.split(":")[0]) > now_hour)
-                    {
-                        databaseReference2 = database.getReference("attendance/enter/student");
-
-                        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        databaseReference_enterState.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                // 파이어베이스의 데이터를 받아오는 곳
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    studentEnterState = snapshot.getValue(StudentEnterState.class);
-                                    if(studentEnterState.getState().length() <= 0)
-                                    {
-                                        studentEnterState.setState("입소중");
-                                    }
-                                    databaseReference2.child(snapshot.getKey()).setValue(studentEnterState);
+                                if(dataSnapshot.getValue().toString().equals("before")) {
+                                    databaseReference_enterState.setValue("ing");
+                                    databaseReference_studentEnter.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            // 파이어베이스의 데이터를 받아오는 곳
+                                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                studentEnterState = snapshot.getValue(StudentEnterState.class);
+                                                if(studentEnterState.getState().length() <= 0) {
+                                                    studentEnterState.setState("입소중");
+                                                }
+                                                databaseReference_studentEnter.child(snapshot.getKey()).setValue(studentEnterState);
 
+                                            }
+                                        };
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            // DB를 가져오던 중 에러 발생 시
+                                            Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
                             };
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                                 // DB를 가져오던 중 에러 발생 시
                                 Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
                             }
                         });
-                    } else if(Integer.parseInt(second_time.split(":")[0]) <= now_hour)
-                    {
-                        databaseReference2 = database.getReference("attendance/enter/student");
 
-                        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    }
+                    // 입소 시간이 지났다면
+                    else if(Integer.parseInt(second_time.split(":")[0]) < Integer.parseInt(now_time.split(":")[0])
+                            || (Integer.parseInt(second_time.split(":")[0]) == Integer.parseInt(now_time.split(":")[0])
+                            && Integer.parseInt(second_time.split(":")[1]) < Integer.parseInt(now_time.split(":")[1]))) {
+                        databaseReference_attendanceEnter.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                // 파이어베이스의 데이터를 받아오는 곳
+
+                                if(!dataSnapshot.getValue().toString().equals("after")) {
+                                    databaseReference_enterState.setValue("after");
+                                }
+                            };
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                // DB를 가져오던 중 에러 발생 시
+                                Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        databaseReference_studentEnter.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                     studentEnterState = snapshot.getValue(StudentEnterState.class);
                                     if(studentEnterState.getState().equals("입소중"))
                                     {
-                                        studentEnterState.setState("지각");
+                                        studentEnterState.setState("입소중(지각)");
                                     }
-                                    databaseReference2.child(snapshot.getKey()).setValue(studentEnterState);
+                                    databaseReference_studentEnter.child(snapshot.getKey()).setValue(studentEnterState);
 
                                 }
                             };
@@ -195,6 +238,8 @@ public class ManagerAttendanceEnterActivity extends AppCompatActivity {
                                 Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
                             }
                         });
+
+
                     }
 
                 }
@@ -208,10 +253,8 @@ public class ManagerAttendanceEnterActivity extends AppCompatActivity {
         });
 
 
-        database = FirebaseDatabase.getInstance();
-
-        databaseReference = database.getReference("attendance/enter/student");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        // 학생 입소 정보 리사이클러뷰 set change
+        databaseReference_studentEnter.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 파이어베이스의 데이터를 받아오는 곳
@@ -219,10 +262,7 @@ public class ManagerAttendanceEnterActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     StudentEnterState studentEnterState = snapshot.getValue(StudentEnterState.class);
                     arrayList.add(studentEnterState);
-
-
                 }
-                //Collections.reverse(arrayList);
                 adapter.notifyDataSetChanged();
             }
 
@@ -232,9 +272,6 @@ public class ManagerAttendanceEnterActivity extends AppCompatActivity {
                 Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
         adapter = new AttendanceEnterCustomAdapter(arrayList, this);
         recyclerView.setAdapter(adapter);
 
@@ -257,23 +294,46 @@ public class ManagerAttendanceEnterActivity extends AppCompatActivity {
 
     public void settingEnterTime()
     {
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("attendance/enter/time");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                databaseReference.child("first").setValue(first_time_hour.getText().toString() + ":" + first_time_minute.getText().toString());
-                databaseReference.child("second").setValue(second_time_hour.getText().toString() + ":" + second_time_minute.getText().toString());
-
-                Toast.makeText(ManagerAttendanceEnterActivity.this, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+        if(first_time_hour.getText().toString().length() > 0
+                && second_time_hour.getText().toString().length() > 0) {
+            if(first_time_minute.getText().toString().length() <= 0 ) {
+                first_time_minute.setText("00");
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // DB를 가져오던 중 에러 발생 시
-                Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
+            if(second_time_minute.getText().toString().length() <= 0 ) {
+                second_time_minute.setText("00");
             }
-        });
+            if(Integer.parseInt(first_time_hour.getText().toString()) >= 0
+                    && Integer.parseInt(first_time_hour.getText().toString()) < 24
+                    && Integer.parseInt(second_time_hour.getText().toString()) >= 0
+                    && Integer.parseInt(second_time_hour.getText().toString()) < 24
+                    && Integer.parseInt(first_time_minute.getText().toString()) >= 0
+                    && Integer.parseInt(first_time_minute.getText().toString()) < 60
+                    && Integer.parseInt(second_time_minute.getText().toString()) >= 0
+                    && Integer.parseInt(second_time_minute.getText().toString()) < 60) {
+
+                databaseReference_attendanceEnter.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        databaseReference_attendanceEnter.child("time").child("first").setValue(first_time_hour.getText().toString() + ":" + first_time_minute.getText().toString());
+                        databaseReference_attendanceEnter.child("time").child("second").setValue(second_time_hour.getText().toString() + ":" + second_time_minute.getText().toString());
+
+                        Toast.makeText(ManagerAttendanceEnterActivity.this, "설정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // DB를 가져오던 중 에러 발생 시
+                        Toast.makeText(ManagerAttendanceEnterActivity.this, error.toException().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            } else {
+                Toast.makeText(this, "잘못된 형식의 시간입니다.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "시간을 입력해주세요.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void menuBoardOnClick(View view)

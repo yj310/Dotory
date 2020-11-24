@@ -8,17 +8,21 @@ public class StudentGoOutState {
     private String go_out_time;
     private String expected_time;
     private String enter_time;
+    private String place;
+    private String purpose;
 
 
     public StudentGoOutState(){}
 
-    public StudentGoOutState(String name, String room, String state, String go_out_time, String expected_time, String enter_time) {
+    public StudentGoOutState(String name, String room, String state, String go_out_time, String expected_time, String enter_time, String place, String purpose) {
         this.name = name;
         this.room = room;
         this.state = state;
         this.go_out_time = go_out_time;
         this.expected_time = expected_time;
         this.enter_time = enter_time;
+        this.place = place;
+        this.purpose = purpose;
     }
 
     public String getName() {
@@ -67,5 +71,21 @@ public class StudentGoOutState {
 
     public void setEnter_time(String enter_time) {
         this.enter_time = enter_time;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
     }
 }

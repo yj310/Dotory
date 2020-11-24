@@ -64,8 +64,18 @@ public class ManagerPostCustomAdapter extends RecyclerView.Adapter<ManagerPostCu
     @Override
     public void onBindViewHolder(@NonNull PostCustomViewHolder holder, int position) {
 
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date now = new Date();
+        String today = formatter.format(now);
+        if(arrayList.get(position).getDate().equals(today))
+        {
+            holder.tv_date.setText("오늘   "+ arrayList.get(position).getTime().substring(0, 5));
+        } else
+        {
+            holder.tv_date.setText(arrayList.get(position).getDate());
+        }
+
         holder.tv_title.setText(arrayList.get(position).getTitle());
-        holder.tv_date.setText(arrayList.get(position).getDate());
         holder.tv_content.setText(arrayList.get(position).getContent());
         holder.id = arrayList.get(position).getDate().replaceAll("-", "") + arrayList.get(position).getTime().replaceAll(":", "");
 

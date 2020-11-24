@@ -10,7 +10,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:background="@drawable/list_table_body"
-        android:weightSum="6">
+        android:weightSum="3">
         <TextView
             android:id="@+id/room"
             android:layout_width="1dp"
@@ -38,7 +38,7 @@
             android:textSize="16dp"
             android:textColor="#444444"
             android:text=""/>
-        <TextView
+        <!--<TextView
             android:id="@+id/go_out_time"
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -64,7 +64,7 @@
             android:gravity="center"
             android:textSize="16dp"
             android:textColor="#444444"
-            android:text=""/>
+            android:text=""/>-->
     </LinearLayout>
 
 

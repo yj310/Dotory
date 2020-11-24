@@ -59,8 +59,10 @@ public class StudentBoardActivity extends AppCompatActivity {
                 arrayList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Post post = snapshot.getValue(Post.class);
-                    arrayList.add(post);
-
+                    if(post.isVisible())
+                    {
+                        arrayList.add(post);
+                    }
                 }
                 Collections.reverse(arrayList);
                 adapter.notifyDataSetChanged();

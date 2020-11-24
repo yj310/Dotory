@@ -51,7 +51,7 @@ public class PostCustomAdapter extends RecyclerView.Adapter<PostCustomAdapter.Po
         String today = formatter.format(now);
         if(arrayList.get(position).getDate().equals(today))
         {
-            holder.tv_date.setText(arrayList.get(position).getDate() + arrayList.get(position).getTime());
+            holder.tv_date.setText("오늘   "+ arrayList.get(position).getTime().substring(0, 5));
         } else
         {
             holder.tv_date.setText(arrayList.get(position).getDate());

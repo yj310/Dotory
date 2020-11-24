@@ -88,11 +88,12 @@
                 android:paddingRight="20dp">
 
                 <TextView
+                    android:id="@+id/text_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:gravity="center"
-                    android:text="2020년 09월 16일"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -107,15 +108,17 @@
                     android:textSize="18dp" />
 
                 <TextView
+                    android:id="@+id/text_go_out_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="16:00      21:00"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/purpose"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -128,6 +131,7 @@
                     android:textColor="#222222"
                     android:textColorHint="#999999" />
                 <EditText
+                    android:id="@+id/place"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -139,6 +143,7 @@
                     android:textColor="#222222"
                     android:textColorHint="#999999" />
                 <EditText
+                    android:id="@+id/expected_time"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -151,6 +156,7 @@
                     android:textColorHint="#999999" />
 
                 <Button
+                    android:id="@+id/go_out_btn"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
