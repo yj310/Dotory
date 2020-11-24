@@ -88,6 +88,7 @@
                     android:layout_marginBottom="30dp"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/text_state"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorNoticeBody"
@@ -95,7 +96,7 @@
                         android:layout_marginTop="100dp"
                         android:layout_marginBottom="25dp"
                         android:textSize="20dp"
-                        android:text="이연지님은\n현재 외출이 가능합니다!"/>
+                        android:text=""/>
 
 
                 </LinearLayout>
